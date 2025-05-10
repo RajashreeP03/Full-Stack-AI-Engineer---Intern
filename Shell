@@ -1,0 +1,17 @@
+get_amfi_data.sh
+
+#!/bin/bash
+
+# Download data from AMFI website and save to a text file
+echo "Downloading AMFI NAV data..."
+curl -s "https://www.amfiindia.com/spages/NAVAll.txt" > nav.txt
+
+# Say what we are doing
+echo "Extracting Scheme Name and NAV..."
+
+# Use awk to pick the 4th and 5th columns (Scheme Name and NAV)
+# and save it as tab-separated (TSV format)
+awk -F '|' 'NF > 1 { print $4 "\t" $5 }' nav.txt > scheme_data.tsv
+
+# Show success message
+echo "Data saved in scheme_data.tsv
